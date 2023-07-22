@@ -9,7 +9,8 @@ defmodule ChatApp.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      preferred_cli_env: preferred_cli_env()
     ]
   end
 
@@ -53,7 +54,10 @@ defmodule ChatApp.MixProject do
       {:plug_cowboy, "~> 2.5"},
 
       # icons
-      {:heroicons, "~> 0.5.3"}
+      {:heroicons, "~> 0.5.3"},
+
+      # lints and checks
+      {:credo, ">= 1.7.0", only: :test, runtime: false}
     ]
   end
 
@@ -72,6 +76,13 @@ defmodule ChatApp.MixProject do
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
       "assets.build": ["tailwind default", "esbuild default"],
       "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"]
+    ]
+  end
+
+  defp preferred_cli_env do
+    [
+      compile: :test,
+      credo: :test
     ]
   end
 end
