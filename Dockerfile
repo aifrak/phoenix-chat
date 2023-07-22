@@ -60,7 +60,7 @@ FROM mvdan/shfmt:v3.7.0 as shfmt
 FROM hadolint/hadolint:v2.12.0 as hadolint
 FROM node:18.16.1-bullseye as node
 
-FROM hexpm/elixir:1.14.3-erlang-25.2.1-ubuntu-jammy-20221130 as elixir
+FROM hexpm/elixir:1.14.5-erlang-25.2.1-ubuntu-jammy-20221130 as elixir
 # Install hex and rebar
 RUN set -e \
   && mix local.hex --force \
@@ -121,6 +121,11 @@ RUN set -e \
   && rm -rf /var/lib/apt/lists/*
 
 USER ${USERNAME}
+
+ARG PHOENIX_VERSION=1.7.7
+RUN set -e \
+  && echo "--- Install Phoenix archive ---" \
+  && mix archive.install hex phx_new ${PHOENIX_VERSION} --force
 
 # —————————————————————————————————————————————— #
 #                     vscode                     #
