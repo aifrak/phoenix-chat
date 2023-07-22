@@ -60,7 +60,8 @@ defmodule ChatApp.MixProject do
       # lints and checks
       {:credo, ">= 1.7.0", only: :test, runtime: false},
       {:dialyxir, ">= 1.3.0", only: :test, runtime: false},
-      {:ex_check, ">= 0.15.0", only: [:dev, :test], runtime: false}
+      {:ex_check, ">= 0.15.0", only: [:dev, :test], runtime: false},
+      {:sobelow, ">= 0.12.2", only: :test, runtime: false}
     ]
   end
 
@@ -78,7 +79,8 @@ defmodule ChatApp.MixProject do
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
       "assets.build": ["tailwind default", "esbuild default"],
-      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"]
+      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"],
+      "sobelow.default": ["sobelow --config --exit"]
     ]
   end
 
@@ -86,7 +88,9 @@ defmodule ChatApp.MixProject do
     [
       compile: :test,
       credo: :test,
-      dialyzer: :test
+      dialyzer: :test,
+      sobelow: :test,
+      "sobelow.default": :test
     ]
   end
 
