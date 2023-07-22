@@ -36,7 +36,10 @@ npm-debug.log
 /assets/node_modules/
 
 # ElixirLS (VSCode extension)
-.elixir_ls/
+/.elixir_ls/
 
 # Keep .gitkeep files
 !/**/.gitkeep
+
+# Dialyzer
+/dialyzer/plts/

@@ -10,7 +10,8 @@ defmodule ChatApp.MixProject do
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
-      preferred_cli_env: preferred_cli_env()
+      preferred_cli_env: preferred_cli_env(),
+      dialyzer: dialyzer()
     ]
   end
 
@@ -57,7 +58,8 @@ defmodule ChatApp.MixProject do
       {:heroicons, "~> 0.5.3"},
 
       # lints and checks
-      {:credo, ">= 1.7.0", only: :test, runtime: false}
+      {:credo, ">= 1.7.0", only: :test, runtime: false},
+      {:dialyxir, ">= 1.3.0", only: :test, runtime: false}
     ]
   end
 
@@ -82,7 +84,34 @@ defmodule ChatApp.MixProject do
   defp preferred_cli_env do
     [
       compile: :test,
-      credo: :test
+      credo: :test,
+      dialyzer: :test
+    ]
+  end
+
+  defp dialyzer do
+    [
+      ignore_warnings: ".dialyzer_ignore.exs",
+      flags: [
+        :error_handling,
+        :underspecs,
+        :unmatched_returns
+      ],
+      plt_add_apps: [
+        # elixir
+        :ex_unit,
+        :mix,
+
+        # phoenix
+        :ecto,
+        :phoenix,
+        :phoenix_pubsub,
+        :phoenix_template,
+        :plug,
+        :telemetry
+      ],
+      plt_add_deps: :apps_direct,
+      plt_local_path: "dialyzer/plts"
     ]
   end
 end
