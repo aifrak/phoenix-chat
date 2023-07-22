@@ -8,16 +8,20 @@ USER root
 
 # Required packages:
 #   - for erlang: libodbc1, libssl3, libsctp1 (see :https://github.com/hexpm/bob/blob/main/priv/scripts/docker/erlang-ubuntu-jammy.dockerfile)
+#   - bcrypt_elixir: gcc, make, libc6-dev
 RUN set -e \
   && export DEBIAN_FRONTEND=noninteractive \
   && echo "--- Install packages ---" \
   && apt-get update -qq \
   && apt-get install -y -qq --no-install-recommends \
+    gcc=4:11.2.0-* \
     git=1:2.34.1-* \
+    libc6-dev=2.35-* \
     libodbc1=2.3.9-* \
     libssl3=3.0.2-* \
     libsctp1=1.0.19+* \
     locales=2.35-* \
+    make=4.3-* \
   && echo "--- Add locales ---" \
   && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 \
   && echo "--- Clean ---" \

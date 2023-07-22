@@ -35,6 +35,7 @@ defmodule ChatApp.MixProject do
   defp deps do
     [
       # phoenix
+      {:bcrypt_elixir, "~> 3.0"},
       {:phoenix, "~> 1.7.7"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.10"},
