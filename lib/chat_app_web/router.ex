@@ -66,8 +66,16 @@ defmodule ChatAppWeb.Router do
 
     live_session :require_authenticated_user,
       on_mount: [{ChatAppWeb.UserAuth, :ensure_authenticated}] do
+      # Users
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
+
+      # Rooms
+      live "/rooms", RoomLive.Index, :index
+      live "/rooms/new", RoomLive.Index, :new
+      live "/rooms/:id/edit", RoomLive.Index, :edit
+      live "/rooms/:id", RoomLive.Show, :show
+      live "/rooms/:id/show/edit", RoomLive.Show, :edit
     end
   end
 
@@ -81,13 +89,5 @@ defmodule ChatAppWeb.Router do
       live "/users/confirm/:token", UserConfirmationLive, :edit
       live "/users/confirm", UserConfirmationInstructionsLive, :new
     end
-
-    # Rooms
-    live "/rooms", RoomLive.Index, :index
-    live "/rooms/new", RoomLive.Index, :new
-    live "/rooms/:id/edit", RoomLive.Index, :edit
-
-    live "/rooms/:id", RoomLive.Show, :show
-    live "/rooms/:id/show/edit", RoomLive.Show, :edit
   end
 end
