@@ -59,7 +59,8 @@ defmodule ChatApp.MixProject do
 
       # lints and checks
       {:credo, ">= 1.7.0", only: :test, runtime: false},
-      {:dialyxir, ">= 1.3.0", only: :test, runtime: false}
+      {:dialyxir, ">= 1.3.0", only: :test, runtime: false},
+      {:ex_check, ">= 0.15.0", only: [:dev, :test], runtime: false}
     ]
   end
 
