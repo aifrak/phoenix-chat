@@ -1,3 +1,5 @@
+<.back navigate={~p"/rooms"}>Back to rooms</.back>
+
 <.header>
   Room <%= @room.id %>
   <:subtitle>This is a room record from your database.</:subtitle>
@@ -12,7 +14,32 @@
   <:item title="Name"><%= @room.name %></:item>
 </.list>
 
-<.back navigate={~p"/rooms"}>Back to rooms</.back>
+<div id="messages" phx-update="stream">
+  <%= for {_dom_id, message} <- @streams.messages do %>
+    <div class="flex items-start mb-4 text-sm">
+      <div class="flex-1 overflow-hidden">
+        <span class="font-bold"><%= message.author %></span>
+        <p class="text-black leading-normal"><%= message.body %></p>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<.simple_form id="chat_box" for={@form} phx-submit="send_message">
+  <.input
+    type="text"
+    field={@form[:message]}
+    placeholder="Type a message"
+    maxlength="100"
+    autocomplete="off"
+    autofocus
+  />
+  <:actions>
+    <.button class="flex items-center">
+      Send <.icon name={:paper_airplane} solid class="h-4 w-4 ml-2" />
+    </.button>
+  </:actions>
+</.simple_form>
 
 <.modal :if={@live_action == :edit} id="room-modal" show on_cancel={JS.patch(~p"/rooms/#{@room}")}>
   <.live_component
