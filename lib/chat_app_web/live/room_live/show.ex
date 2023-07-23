@@ -20,7 +20,7 @@ defmodule ChatAppWeb.RoomLive.Show do
   def handle_params(%{"id" => id}, _, socket) do
     room = Chat.get_room!(id)
 
-    ChatAppWeb.Endpoint.subscribe(topic(id))
+    _ = ChatAppWeb.Endpoint.subscribe(topic(id))
 
     socket
     |> assign(:page_title, page_title(socket.assigns.live_action))
@@ -52,6 +52,10 @@ defmodule ChatAppWeb.RoomLive.Show do
     socket
     |> insert_message(message)
     |> then(&{:noreply, &1})
+  end
+
+  def handle_info(_msg, socket) do
+    {:noreply, socket}
   end
 
   defp topic(room_id), do: "room:#{room_id}"

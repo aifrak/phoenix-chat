@@ -6,5 +6,5 @@ defmodule ChatApp.Helper do
   @doc """
   Generate a random UUID v4.
   """
-  def uuid(), do: Ecto.UUID.generate()
+  def uuid, do: Ecto.UUID.generate()
 end
