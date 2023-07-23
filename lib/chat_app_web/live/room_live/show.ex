@@ -34,6 +34,8 @@ defmodule ChatAppWeb.RoomLive.Show do
   def handle_event("send_message", %{"message" => body}, socket) do
     Logger.info("Send message")
 
+    # TODO: Validations
+
     current_user = socket.assigns.current_user
     room = socket.assigns.room
     message = Message.new(body, current_user.email)
