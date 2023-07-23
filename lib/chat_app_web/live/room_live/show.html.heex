@@ -16,12 +16,7 @@
 
 <div id="messages" phx-update="stream">
   <%= for {_dom_id, message} <- @streams.messages do %>
-    <div class="flex items-start mb-4 text-sm">
-      <div class="flex-1 overflow-hidden">
-        <span class="font-bold"><%= message.author %></span>
-        <p class="text-black leading-normal"><%= message.body %></p>
-      </div>
-    </div>
+    <.message author={message.author}><%= message.body %></.message>
   <% end %>
 </div>
 

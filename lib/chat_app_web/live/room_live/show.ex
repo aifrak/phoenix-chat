@@ -3,6 +3,7 @@ defmodule ChatAppWeb.RoomLive.Show do
   use ChatAppWeb, :live_view
 
   alias ChatApp.Chat
+  import ChatAppWeb.RoomLive.MessageComponent
 
   @insert_at 1
 
@@ -60,9 +61,8 @@ defmodule ChatAppWeb.RoomLive.Show do
 
   defp topic(room_id), do: "room:#{room_id}"
 
-  defp insert_message(socket, message) do
-    stream_insert(socket, :messages, message, at: @insert_at)
-  end
+  defp insert_message(socket, message),
+    do: stream_insert(socket, :messages, message, at: @insert_at)
 
   defp page_title(:show), do: "Show Room"
   defp page_title(:edit), do: "Edit Room"
