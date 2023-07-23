@@ -572,16 +572,7 @@ defmodule ChatAppWeb.CoreComponents do
 
   ## Examples
 
-      <Heroicons.cake />
-      <Heroicons.cake solid />
-      <Heroicons.cake mini />
-
-  You can also pass arbitrary HTML attributes to the components, such as classes:
-
-  ## Examples
-
-      <Heroicons.cake class="w-2 h-2" />
-      <Heroicons.cake solid class="w-2 h-2 text-gray-500" />
+      <.icon name={:academic_cap} class="h-4 w-4" />
   """
   attr :name, :atom, required: true
   attr :outlined, :boolean, default: true
