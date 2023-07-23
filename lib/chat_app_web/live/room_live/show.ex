@@ -3,6 +3,7 @@ defmodule ChatAppWeb.RoomLive.Show do
   use ChatAppWeb, :live_view
 
   alias ChatApp.Chat
+  alias ChatAppWeb.RoomLive.Models.Message
   import ChatAppWeb.RoomLive.MessageComponent
 
   @insert_at 1
@@ -35,7 +36,7 @@ defmodule ChatAppWeb.RoomLive.Show do
 
     current_user = socket.assigns.current_user
     room = socket.assigns.room
-    message = %{id: ChatApp.Helper.uuid(), body: body, author: current_user.email}
+    message = Message.new(body, current_user.email)
 
     ChatAppWeb.Endpoint.broadcast_from!(self(), topic(room.id), "new_message", message)
 
