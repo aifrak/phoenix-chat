@@ -43,3 +43,6 @@ npm-debug.log
 
 # Dialyzer
 /dialyzer/plts/
+
+# Ignore Docker compose override
+docker-compose.override.yml
