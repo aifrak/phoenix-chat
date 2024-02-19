@@ -14,8 +14,12 @@
   <:item title="Name"><%= @room.name %></:item>
 </.list>
 
-<%!-- FIXME: Auto scroll to bottom after inserting a message with using JS hooks --%>
-<div id="messages" phx-update="stream" class="overflow-auto h-72 relative mx-auto">
+<div
+  id="messages"
+  phx-update="stream"
+  phx-hook="ScrollToBottom"
+  class="overflow-auto h-72 relative mx-auto"
+>
   <%= for {_dom_id, message} <- @streams.messages do %>
     <.message author={message.author}><%= message.body %></.message>
   <% end %>
