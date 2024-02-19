@@ -42,7 +42,6 @@ defmodule ChatAppWeb.RoomLive.Show do
 
     ChatAppWeb.Endpoint.broadcast_from!(self(), topic(room.id), "new_message", message)
 
-    # FIXME: Reset the input field after submit
     socket
     |> new_form()
     |> insert_message(message)
